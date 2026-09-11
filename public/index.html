@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevfSeek - Backend Express CRUD Tester</title>
+    <style>
+      body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; padding: 30px; margin: 0; }
+      .container { max-width: 800px; margin: 0 auto; }
+      h1 { color: #38bdf8; }
+      .card { background: #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #334155; }
+      input, button { padding: 10px 14px; border-radius: 8px; border: 1px solid #334155; font-size: 14px; }
+      input { background: #0f172a; color: white; flex: 1; }
+      button { background: #0284c7; color: white; cursor: pointer; font-weight: 700; border: none; }
+      button:hover { background: #0369a1; }
+      pre { background: #000; color: #4ade80; padding: 14px; border-radius: 8px; overflow-x: auto; font-size: 13px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚀 DevfSeek Backend - Panel de Pruebas CRUD</h1>
+      <p style="color: #94a3b8">Servidor Node.js + Express con endpoints RESTful para gestión de chats.</p>
+
+      <div class="card">
+        <h3>1. Probar Endpoint "Hola Mundo"</h3>
+        <button onclick="testSaludo()">GET /api/saludo</button>
+      </div>
+
+      <div class="card">
+        <h3>2. Crear Nuevo Chat (POST)</h3>
+        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+          <input type="text" id="chatTitle" placeholder="Título del nuevo chat (ej. Algoritmos)" />
+          <input type="text" id="firstMsg" placeholder="Primer mensaje opcional" />
+          <button onclick="createChat()">Crear Chat</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>3. Listar todos los Chats (GET)</h3>
+        <button onclick="getChats()">GET /api/chats</button>
+      </div>
+
+      <div class="card">
+        <h3>4. Consola de Respuesta del Servidor:</h3>
+        <pre id="output">// Los resultados de las peticiones HTTP aparecerán aquí...</pre>
+      </div>
+    </div>
+
+    <script>
+      const out = document.getElementById('output');
+
+      async function testSaludo() {
+        const res = await fetch('/api/saludo');
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      }
+
+      async function getChats() {
+        const res = await fetch('/api/chats');
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      }
+
+      async function createChat() {
+        const title = document.getElementById('chatTitle').value;
+        const firstMessage = document.getElementById('firstMsg').value;
+        const res = await fetch('/api/chats', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, firstMessage })
+        });
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      }
+    </script>
+  </body>
+</html>
