@@ -1,0 +1,17 @@
+{
+  "name": "actividad-4-servidor-express-crud",
+  "version": "1.0.0",
+  "description": "Servidor backend RESTful con Express, Node.js y operaciones CRUD para DevfSeek",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node test_endpoints.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {}
+}
